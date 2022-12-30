@@ -12,9 +12,16 @@ void student_detail()
     printf("Student’s Name: ");
     printf("Kirtan Anghan \n");      // name of the student
     printf("Practical no. ");
-    printf("1 \n");                  //practical no.
+    printf("7 \n");                  //practical no.
     printf("Practical AIM: ");
-    printf("Introduction to pointers. Call by Value and Call by reference. \n");   //Aim of practical
+    printf("Write a menu driven program to implement following operations on the singly linked list."
+
+"(a) Insert a node at the front of the linked list."
+"(b) Insert a node at the end of the linked list."
+"(c) Insert a node such that the linked list is in ascending order.(according to info. Field)"
+"(d) Delete the first node of the linked list."
+"(e) Delete a node before a specified position."
+"(f) Delete a node after specified position.\n");   //Aim of practical
     printf("This program has been written at (date and time) : %s \n\n", ctime(&t));
 }
 struct node

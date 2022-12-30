@@ -11,9 +11,9 @@ void student_detail()
     printf("Student’s Name: ");
     printf("Kirtan Anghan \n"); // name of the student
     printf("Practical no. ");
-    printf("1 \n"); // practical no.
+    printf("9 \n"); // practical no.
     printf("Practical AIM: ");
-    printf("Introduction to pointers. Call by Value and Call by reference. \n"); // Aim of practical
+    printf("Write a program to implement a queue using a linked list. \n"); // Aim of practical
     printf("This program has been written at (date and time) : %s \n\n", ctime(&t));
 }
 struct Node *f = NULL;

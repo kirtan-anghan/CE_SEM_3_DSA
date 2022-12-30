@@ -11,9 +11,10 @@ void student_detail()
     printf("Student’s Name: ");
     printf("Kirtan Anghan \n"); // name of the student
     printf("Practical no. ");
-    printf("1 \n"); // practical no.
+    printf("11 \n"); // practical no.
     printf("Practical AIM: ");
-    printf("Introduction to pointers. Call by Value and Call by reference. \n"); // Aim of practical
+    printf("Write a program to implement following operations on the circular linked list.(a) Insert a node at the end of the linked list.(b) Insert a node before"
+    " the specified position.(c) Delete the first node of the linked list.(d) Delete a node after a specified position.\n"); // Aim of practical
     printf("This program has been written at (date and time) : %s \n\n", ctime(&t));
 }
 struct node
