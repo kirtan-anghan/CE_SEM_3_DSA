@@ -15,7 +15,7 @@ void student_detail()
     printf("1 \n");                  //practical no.
     printf("Practical AIM: ");
     printf("Introduction to pointers. Call by Value and Call by reference. \n");   //Aim of practical
-    printf("This program has been writeen at (date and time) : %s \n\n", ctime(&t));
+    printf("This program has been written at (date and time) : %s \n\n", ctime(&t));
 }
 
 int front = -1, rear = -1; // global variable
