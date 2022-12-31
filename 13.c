@@ -1,6 +1,6 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include <time.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include<time.h>
 
 void student_detail()
 {
@@ -16,205 +16,183 @@ void student_detail()
     printf("Implement recursive and non-recursive tree traversing methods inorder, preorder and post-order traversal. \n");   //Aim of practical
     printf("This program has been written at (date and time) : %s \n\n", ctime(&t));
 }
-
-struct node {
-  int data;
-  struct node * lptr, * rptr;
+struct queue
+{
+    int size;
+    int front;
+    int rear;
+    struct node **Q;
 };
+void create(struct queue *q, int size)
+{
+    q->size = size;
+    q->front = q->rear = -1;
+    q->Q = (struct node **)malloc(q->size * sizeof(struct node *));
+}
+void enqueue(struct queue *q, struct node *x)
+{
+    if (q->rear == q->size - 1)
+        printf("queue is full");
+    else
+    {
+        q->rear++;
+        q->Q[q->rear] = x;
+    }
+}
+struct node *dequeue(struct queue *q)
+{
+    struct node *x = NULL;
+    if (q->front == q->rear)
+        printf("queue is empty");
+    else
+    {
+        q->front++;
+        x = q->Q[q->front];
+    }
+    return x;
+}
+int isempty(struct queue q)
+{
+    return q.front == q.rear;
+}
+struct node
+{
+    struct node *lchild;
+    struct node *rchild;
+    int data;
+};
+struct node *root = NULL;
+struct stack{
+    int size;
+    int top;
+    struct node **s;
+};
+void stackcreate(struct stack *st,int size){
+    st->size=size;
+    st->top=-1;
+    st->s=(struct node **)malloc(st->size*sizeof(struct node *));
 
-void Insert(struct node * , int);
-void Preorder(struct node * );
-void Postorder(struct node * );
-void Inorder(struct node * );
-void Delete(struct node * , int);
-struct node * Header;
-int main() {
-  student_detail();
-  int ch, x;
-  Header = (struct node * ) malloc(sizeof(struct node));
-  Header -> lptr = Header;
-  Header -> rptr = Header;
-  do {
-    printf("\n1.Insert a node in a Tree");
-    printf("\n2.Preorder Traversal(Recursively)");
-    printf("\n3.Postorder Traversal(Recursively)");
-    printf("\n4.Inorder Traversal(Recursively)");
-    printf("\n5.Delete a node from Binary Search Tree");
-    printf("\n6.Exit");
-    printf("\n\nEnter Choice: ");
-    scanf("%d", & ch);
-    switch (ch) {
-    case 1:
-      printf("\n\tEnter Element : ");
-      scanf("%d", & x);
-      Insert(Header, x);
-      printf("\n\tInorder Traversal(Recursively)=\n\t");
-      printf("\n\t-------------------------------------\n\t");
-      Inorder(Header -> lptr);
-      printf("\n\t-------------------------------------\n\t");
-      break;
-    case 2:
-      printf("\n\tPreorder Traversal(Recursively):\n\t");
-      printf("\n\t-------------------------------------\n\t");
-      Preorder(Header -> lptr);
-      printf("\n\t-------------------------------------\n\t");
-      break;
-    case 3:
-      printf("\n\tPostorder Traversal(Recursively):\n\t");
-      printf("\n\t-------------------------------------\n\t");
-      Postorder(Header -> lptr);
-      printf("\n\t-------------------------------------\n\t");
-      break;
-    case 4:
-      printf("\n\tInorder Traversal(Recursively):\n\t");
-      printf("\n\t-------------------------------------\n\t");
-      Inorder(Header -> lptr);
-      printf("\n\t-------------------------------------\n\t");
-      break;
-    case 5:
-      printf("\n\tEnter Element which u want to Delete: ");
-      scanf("%d", & x);
-      printf("\n\t-------------------------------------\n\t");
-      Delete(Header, x);
-      printf("\n\t-------------------------------------\n\t");
-      break;
-    case 6:
-      exit(0);
-      break;
-    default:
-      printf("\n\t Plz Try Again.");
+}
+void push(struct stack *st,struct node  *x){
+    if(st->top==st->size-1)
+    printf("stack is overflow");
+    else{
+        st->top++;
+        st->s[st->top]=x;
     }
-  } while (6);
 }
-void Insert(struct node * h, int x) {
-  struct node * New, * parent, * cur;
-  New = (struct node * ) malloc(sizeof(struct node));
-  if (New == NULL) {
-    printf("\n\tNo Tree Node Available.");
-    return;
-  }
-  New -> data = x;
-  New -> lptr = NULL;
-  New -> rptr = NULL;
-  if (h -> lptr == h) {
-    h -> lptr = New;
-    return;
-  }
-  cur = h -> lptr;
-  parent = h;
-  while (cur != NULL) {
-    if (x < cur -> data) {
-      parent = cur;
-      cur = cur -> lptr;
-    } else if (x > cur -> data) {
-      parent = cur;
-      cur = cur -> rptr;
-    } else {
-      printf("\n\t Element Already Exist.\n");
-      return;
+struct node * pop(struct stack*st){
+    struct node * x=NULL;
+    if(st->top==-1)
+    printf("stack is underflow");
+    else{
+        x=st->s[st->top--];
     }
-  }
-  if (x < parent -> data) {
-    parent -> lptr = New;
-    return;
-  }
-  if (x > parent -> data) {
-    parent -> rptr = New;
-    return;
-  }
-  return;
+    return x;
 }
-void Preorder(struct node * t) {
-  if (t != NULL)
-    printf("%d  ", t -> data);
-  else {
-    printf("\n\t Empty Tree.");
-    return;
-  }
-  if (t -> lptr != NULL)
-    Preorder(t -> lptr);
-  if (t -> rptr != NULL)
-    Preorder(t -> rptr);
-  return;
+int isemptystack(struct stack st){
+    if(st.top==-1)
+    return 1;
+    return 0;
 }
-void Postorder(struct node * t) {
-  if (t == NULL) {
-    printf("\n\t Empty Tree.");
-    return;
-  }
-  Postorder(t -> lptr);
-  Postorder(t -> rptr);
-  printf("%d  ", t -> data);
-  return;
+int isfullstack(struct stack st){
+    return st.top==st.size-1;
 }
-void Inorder(struct node * t) {
-  if (t == NULL) {
-    printf("\n\t Empty Tree.");
-    return;
-  }
-  if (t -> lptr != NULL)
-    Inorder(t -> lptr);
-  printf("%d  ", t -> data);
-  if (t -> rptr != NULL)
-    Inorder(t -> rptr);
-  return;
-}
-void Delete(struct node * h, int x) {
-  int found;
-  char d;
-  struct node * cur, * parent, * pred, * suc, * q;
-  if (h -> lptr == h) {
-    printf("\n\t Empty Tree.");
-    return;
-  }
-  parent = h;
-  cur = h -> lptr;
-  d = 'L';
-  found = 0;
-  while (!found && cur != NULL) {
-    if (x == cur -> data)
-      found = 1;
-    else if (x < cur -> data) {
-      parent = cur;
-      cur = cur -> lptr;
-      d = 'L';
-    } else {
-      parent = cur;
-      cur = cur -> rptr;
-      d = 'R';
-    }
-  }
-  if (!found) {
-    printf("\n\t Node is not found.");
-    return;
-  }
-  if (cur -> lptr == NULL)
-    q = cur -> rptr;
-  else {
-    if (cur -> rptr == NULL)
-      q = cur -> lptr;
-    else {
-      suc = cur -> rptr;
-      if (suc -> lptr == NULL) {
-        suc -> lptr = cur -> lptr;
-        q = suc;
-      } else {
-        pred = cur -> rptr;
-        suc = pred -> lptr;
-        while (suc -> lptr != NULL) {
-          pred = suc;
-          suc = pred -> lptr;
+void treecreate()
+{
+    struct node *t, *p;
+    int x;
+    struct queue q;
+    create(&q, 100);
+    printf("enter the value of root");
+    scanf("%d", &x);
+    root = (struct node *)malloc(sizeof(struct node));
+    root->data = x;
+    root->lchild = root->rchild = NULL;
+    enqueue(&q, root);
+    while (!isempty(q)){
+        p = dequeue(&q);
+        printf("enter left child of %d:", p->data);
+        scanf("%d", &x);
+        if (x != -1){
+            t = (struct node *)malloc(sizeof(struct node));
+            t->data = x;
+            t->lchild = t->rchild = NULL;
+            p->lchild = t;
+            enqueue(&q, t);
         }
-        pred -> lptr = suc -> rptr;
-        suc -> lptr = cur -> lptr;
-        suc -> rptr = cur -> rptr;
-        q = suc;
-      }
+        printf("enter right child of %d:", p->data);
+        scanf("%d", &x);
+        if (x != -1){
+            t = (struct node *)malloc(sizeof(struct node));
+            t->data = x;
+            t->lchild = t->rchild = NULL;
+            p->rchild = t;
+            enqueue(&q, t);
+        }
     }
-  }
-  if (d == 'L')
-    parent -> lptr = q;
-  else
-    parent -> rptr = q;
-  printf("\n\t%d is Deleted.", x);
+}
+void preorder(struct node *p)
+{
+    if (p){
+        printf("%d\t", p->data);
+        preorder(p->lchild);
+        preorder(p->rchild);
+    }
+}
+void inorder(struct node *p)
+{
+    if (p){
+        inorder(p->lchild);
+        printf("%d\t", p->data);
+        inorder(p->rchild);
+    }
+}
+void postorder(struct node *p)
+{
+    if (p){
+        postorder(p->lchild);
+        postorder(p->rchild);
+        printf("%d\t", p->data);
+    }
+}
+void ipreorder(struct node *p)
+{
+    struct stack stk;
+    stackcreate(&stk, 100);
+    while (p || !isemptystack(stk)){
+        if (p){
+            printf("%d ", p->data);
+            push(&stk, p);
+            p = p->lchild;
+        }
+        else{
+            p = pop(&stk);
+            p = p->rchild;
+        }
+    }
+}
+void iinorder(struct node *p){
+    struct stack stk;
+    stackcreate(&stk, 100);
+    while (p || !isemptystack(stk)){
+        if (p){
+            push(&stk, p);
+            p = p->lchild;
+        }
+        else{
+            p = pop(&stk);
+            printf("%d ", p->data);
+            p = p->rchild;
+        }
+    }
+}
+int main()
+{   student_detail();
+    treecreate();
+    printf("pre order\n");
+    ipreorder(root);
+    printf("\ninorder order\n");
+    iinorder(root);
+    return 0;
 }
