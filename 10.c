@@ -117,7 +117,7 @@ int main(){
         printf("\n1.Insert a node at the front of linked list\n");
         printf("2.Insert a node at the end of linked list\n");
         printf("3.Delete a last node of linked list\n");
-        printf("4.Delete a node before specificed position\n");
+        printf("4.Delete a node before specified position\n");
         printf("5.Exit\n");
         printf("Enter your choice\n");
         scanf("%d", &choice);
